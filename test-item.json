@@ -1,0 +1,14 @@
+{
+  "PK": {
+    "S": "USER#test-001"
+  },
+  "SK": {
+    "S": "PROFILE"
+  },
+  "name": {
+    "S": "Test User"
+  },
+  "email": {
+    "S": "test@example.com"
+  }
+}
