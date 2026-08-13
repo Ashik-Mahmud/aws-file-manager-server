@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
 import { DynamoDBService } from '../dynamodb/dynamodb.service';
+import { EmailService } from '../email/email.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 
@@ -15,6 +16,7 @@ export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
         private readonly dynamoDBService: DynamoDBService,
+        private readonly emailService: EmailService
     ) { }
 
     // Register a new user
@@ -48,6 +50,8 @@ export class AuthService {
 
             createdAt: new Date().toISOString(),
         });
+
+        await this.emailService.sendWelcomeEmail(email, registerDto?.email?.split('@')[0]);
 
         return {
             message: 'User registered successfully',
