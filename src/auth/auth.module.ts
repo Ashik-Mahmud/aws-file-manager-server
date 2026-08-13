@@ -9,8 +9,9 @@ import { JwtStrategy } from './jwt.strategy';
 @Module({
   imports: [
     DynamoDBModule,
+    EmailModule,
     JwtModule.registerAsync({
-      imports: [ConfigModule, EmailModule],
+      imports: [ConfigModule, ],
       inject: [ConfigService],
 
       useFactory: (
